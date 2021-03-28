@@ -5,4 +5,4 @@
  * @returns {ShallowWrapper}
  */
 export const findByTestAttr = (wrapper, attrVal) =>
-  wrapper.find(`[data-test='${attrVal}']`);
+  wrapper.find(`[data-test="${attrVal}"]`);
