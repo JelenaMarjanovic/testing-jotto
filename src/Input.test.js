@@ -4,8 +4,8 @@ import { shallow } from 'enzyme';
 import { findByTestAttr, checkProps } from '../test/testUtils';
 import Input from './Input';
 
+// Mock entire module for destructuring useState ono import
 const mockSetCurrentGuess = jest.fn();
-
 jest.mock('react', () => ({
   ...jest.requireActual('react'),
   useState: (initialState) => [initialState, mockSetCurrentGuess]
