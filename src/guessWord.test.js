@@ -44,6 +44,73 @@ describe('no words guessed', () => {
   });
 });
 
-describe('some words guessed', () => {});
+describe('some words guessed', () => {
+  let wrapper;
 
-describe('guess secret word', () => {});
+  beforeEach(() => {
+    wrapper = setup({
+      secretWord: 'party',
+      success: false,
+      guessedWords: [
+        {
+          guessedWord: 'agile',
+          letterMatchCount: 1
+        }
+      ]
+    });
+  });
+
+  test('add row to guessedWords table', () => {
+    const guessedWordsRows = findByTestAttr(wrapper, 'guessed-word');
+
+    expect(guessedWordsRows).toHaveLength(2);
+  });
+});
+
+describe('guess secret word', () => {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = setup({
+      secretWord: 'party',
+      success: false,
+      guessedWords: [
+        {
+          guessedWord: 'agile',
+          letterMatchCount: 1
+        }
+      ]
+    });
+
+    // Add value to input box
+    const inputBox = findByTestAttr(wrapper, 'input-box');
+    const mockEvent = { target: { value: 'party' } };
+    inputBox.simulate('change', mockEvent);
+
+    // Simulate click on submit button
+    const submitButton = findByTestAttr(wrapper, 'submit-button');
+    submitButton.simulate('click', { preventDefault() {} });
+  });
+
+  test('add row to guessedWords table', () => {
+    const guessedWordsRows = findByTestAttr(wrapper, 'guessed-word');
+
+    expect(guessedWordsRows).toHaveLength(3);
+  });
+
+  test('displays congrats component', () => {
+    const congratsComponent = findByTestAttr(wrapper, 'component-congrats');
+
+    expect(congratsComponent.text().length).toBeGreaterThan(0);
+  });
+
+  test('does not display input component contents', () => {
+    // Input box
+    const inputBox = findByTestAttr(wrapper, 'input-box');
+    expect(inputBox.exists()).toBe(false);
+
+    // Submit button
+    const submitButton = findByTestAttr(wrapper, 'submit-button');
+    expect(submitButton.exists()).toBe(false);
+  });
+});
