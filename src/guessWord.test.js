@@ -26,7 +26,23 @@ const setup = (state = {}) => {
   return wrapper;
 };
 
-describe('no words guessed', () => {});
+describe('no words guessed', () => {
+  let wrapper;
+
+  beforeEach(() => {
+    wrapper = setup({
+      secretWord: 'party',
+      success: false,
+      guessedWords: []
+    });
+  });
+
+  test('creates guessedWords table with one row', () => {
+    const guessedWordsRows = findByTestAttr(wrapper, 'guessed-word');
+
+    expect(guessedWordsRows).toHaveLength(1);
+  });
+});
 
 describe('some words guessed', () => {});
 
