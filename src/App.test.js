@@ -3,10 +3,10 @@ import { mount } from 'enzyme';
 import { findByTestAttr } from '../test/testUtils';
 import App from './App';
 
+import { getSecretWord as mockGetSecretWord } from './actions';
+
 // Activate global mock to make sure getSecretWork doesn't make network call
 jest.mock('./actions');
-
-import { getSecretWord as mockGetSecretWord } from './actions';
 
 /**
  * Factory function to create a ShallowWrapper for the App component.
