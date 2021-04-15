@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+
 import './App.css';
 
 import Congrats from './Congrats';
@@ -8,10 +10,9 @@ import Input from './Input';
 import { getSecretWord } from './actions';
 
 function App() {
-  // TODO: get props from shared state
-  const success = false;
+  const success = useSelector((state) => state.success);
   const secretWord = 'party';
-  const guessedWords = [];
+  const guessedWords = useSelector((state) => state.guessedWords);
 
   useEffect(() => {
     getSecretWord();
