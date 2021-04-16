@@ -4,7 +4,8 @@ import { getLetterMatchCount } from '../helpers';
 
 export const actionTypes = {
   CORRECT_GUESS: 'CORRECT_GUESS',
-  GUESS_WORD: 'GUESS_WORD'
+  GUESS_WORD: 'GUESS_WORD',
+  SET_SECRET_WORD: 'SET_SECRET_WORD'
 };
 
 /**
@@ -30,7 +31,18 @@ export const guessWord = (guessedWord) => {
   };
 };
 
+/**
+ * Returns Redux Thunk function that initiates an axios request
+ * and dispatches the response as a 'SET_SECRET_WORD' action.
+ * @returns {function} - Redux Thunk function.
+ */
 export const getSecretWord = () => {
-  // TODO: write actual action with Redux / Context
-  return axios.get('http://localhost:3030').then((response) => response.data);
+  return function (dispatch) {
+    return axios.get('http://localhost:3030').then((response) => {
+      dispatch({
+        type: actionTypes.SET_SECRET_WORD,
+        payload: response.data
+      });
+    });
+  };
 };
