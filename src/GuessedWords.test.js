@@ -13,7 +13,7 @@ const defaultProps = {
   ]
 };
 /**
- * Factory to create a ShallowWrapper for the GuessedWords component.
+ * Factory function to create a ShallowWrapper for the GuessedWords component.
  * @function setup
  * @param {object} props - Component props specific to this setup.
  * @returns {ShallowWrapper}
@@ -70,5 +70,17 @@ describe('if there are words guessed', () => {
   test('correct number of guessed words', () => {
     const guessedWordNodes = findByTestAttr(wrapper, 'guessed-word');
     expect(guessedWordNodes.length).toBe(guessedWords.length);
+  });
+
+  test('includes guess word index for each word', () => {
+    const guessWordIndexes = findByTestAttr(wrapper, 'guessed-word-index');
+    const indexTextSet = new Set(
+      guessWordIndexes.map((wrapper) => wrapper.text())
+    );
+    const expectedSet = new Set(
+      guessedWords.map((word, index) => (index + 1).toString())
+    );
+
+    expect(indexTextSet).toEqual(expectedSet);
   });
 });

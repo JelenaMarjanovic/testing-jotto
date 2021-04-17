@@ -52,6 +52,12 @@ describe('no words guessed', () => {
 
     expect(guessedWordsRows).toHaveLength(1);
   });
+
+  test('show 1 total guess', () => {
+    const component = findByTestAttr(wrapper, 'component-total-guesses');
+
+    expect(component.text()).toContain('1');
+  });
 });
 
 describe('some words guessed', () => {
@@ -74,6 +80,12 @@ describe('some words guessed', () => {
     const guessedWordsRows = findByTestAttr(wrapper, 'guessed-word');
 
     expect(guessedWordsRows).toHaveLength(2);
+  });
+
+  test('add 1 to total guesses', () => {
+    const component = findByTestAttr(wrapper, 'component-total-guesses');
+
+    expect(component.text()).toContain('2');
   });
 });
 
@@ -106,6 +118,12 @@ describe('guess secret word', () => {
     const guessedWordsRows = findByTestAttr(wrapper, 'guessed-word');
 
     expect(guessedWordsRows).toHaveLength(3);
+  });
+
+  test('add guess to total guesses', () => {
+    const component = findByTestAttr(wrapper, 'component-total-guesses');
+
+    expect(component.text()).toContain('3');
   });
 
   test('displays congrats component', () => {

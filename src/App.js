@@ -4,8 +4,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import './App.css';
 
 import Congrats from './Congrats';
-import GuessedWords from './GuessedWords';
 import Input from './Input';
+import GuessedWords from './GuessedWords';
+import TotalGuesses from './TotalGuesses';
 
 import { getSecretWord } from './actions';
 
@@ -26,6 +27,7 @@ function App() {
       <Congrats success={success} />
       <Input success={success} secretWord={secretWord} />
       <GuessedWords guessedWords={guessedWords} />
+      <TotalGuesses guessCount={guessedWords.length} />
     </div>
   );
 }
