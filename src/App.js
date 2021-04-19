@@ -5,10 +5,11 @@ import './App.css';
 
 import Congrats from './Congrats';
 import Input from './Input';
+import NewWordButton from './NewWordButton';
 import GuessedWords from './GuessedWords';
 import TotalGuesses from './TotalGuesses';
 
-import { getSecretWord } from './actions';
+import { getSecretWord, resetGame } from './actions';
 
 function App() {
   const success = useSelector((state) => state.success);
@@ -16,6 +17,10 @@ function App() {
   const secretWord = useSelector((state) => state.secretWord);
 
   const dispatch = useDispatch();
+
+  const handleResetAction = () => {
+    dispatch(resetGame());
+  };
 
   useEffect(() => {
     dispatch(getSecretWord());
@@ -25,6 +30,7 @@ function App() {
     <div data-test="component-app" className="container">
       <h1>Jotto</h1>
       <Congrats success={success} />
+      <NewWordButton display={success} resetAction={handleResetAction} />
       <Input success={success} secretWord={secretWord} />
       <GuessedWords guessedWords={guessedWords} />
       <TotalGuesses guessCount={guessedWords.length} />
