@@ -40,7 +40,8 @@ const Input = ({ secretWord }) => {
         <button
           data-test="give-up-button"
           className="btn btn-danger mb-2"
-          onClick={() => {
+          onClick={(event) => {
+            event.preventDefault();
             dispatch(giveUp());
           }}
         >
