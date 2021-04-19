@@ -29,7 +29,6 @@ function App() {
   }, [dispatch]);
 
   console.log(secretWord);
-  console.log(success, guessedWords, secretWord, giveUp);
 
   return (
     <div data-test="component-app" className="container">
