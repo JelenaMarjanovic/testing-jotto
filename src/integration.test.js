@@ -1,5 +1,5 @@
 import { storeFactory } from '../test/testUtils';
-import { guessWord } from './actions';
+import { guessWord, setUserSecretWord } from './actions';
 
 describe('guessWord action dispatcher', () => {
   const secretWord = 'party';
@@ -100,5 +100,34 @@ describe('guessWord action dispatcher', () => {
 
       expect(newState).toEqual(expectedState);
     });
+  });
+});
+
+describe('setUserSecretWord action dispatcher', () => {
+  // This is in the integration test section because
+  // it involves the setUserSecretWord action creator and two reducers
+  let store;
+  let newState;
+
+  // This represents the word the user entered
+  const userSecretWord = 'lunch';
+
+  // This represents the word we got from the server
+  const initialState = { secretWord: 'party' };
+
+  // Here, we will run the action in the beforeEach,
+  // and check on each relevant piece of state separately
+  beforeEach(() => {
+    store = storeFactory(initialState);
+    store.dispatch(setUserSecretWord(userSecretWord));
+    newState = store.getState();
+  });
+
+  test('updates "secretWord" state correctly after entered word', () => {
+    expect(newState.secretWord).toBe(userSecretWord);
+  });
+
+  test('updates "userEnter" state correctly after entered word', () => {
+    expect(newState.userEnter).toBe('done');
   });
 });
