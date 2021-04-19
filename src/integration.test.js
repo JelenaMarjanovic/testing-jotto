@@ -7,7 +7,7 @@ describe('guessWord action dispatcher', () => {
 
   describe('no guessed words', () => {
     let store;
-    const initialState = { secretWord };
+    const initialState = { secretWord, giveUp: false };
 
     beforeEach(() => {
       store = storeFactory(initialState);
@@ -52,7 +52,7 @@ describe('guessWord action dispatcher', () => {
 
   describe('some guessed words', () => {
     const guessedWords = [{ guessedWords: 'agile', letterMatchCount: 1 }];
-    const initialState = { guessedWords, secretWord };
+    const initialState = { guessedWords, secretWord, giveUp: false };
     let store;
 
     beforeEach(() => {
