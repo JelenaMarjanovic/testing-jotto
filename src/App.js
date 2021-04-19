@@ -13,6 +13,8 @@ import TotalGuesses from './TotalGuesses';
 import EnterWordButton from './EnterWordButton';
 import EnterWordForm from './EnterWordForm';
 
+import ServerError from './ServerError';
+
 import {
   getSecretWord,
   resetGame,
@@ -28,6 +30,8 @@ function App() {
 
   const userEnter = useSelector((state) => state.userEnter);
 
+  const serverError = useSelector((state) => state.serverError);
+
   const dispatch = useDispatch();
 
   const handleResetAction = () => {
@@ -42,10 +46,13 @@ function App() {
     dispatch(getSecretWord());
   }, [dispatch]);
 
-  return (
-    <div data-test="component-app" className="container">
-      <h1>Jotto</h1>
-      {userEnter === 'inProgress' ? (
+  let contents;
+
+  if (serverError) {
+    contents = <ServerError />;
+  } else {
+    contents =
+      userEnter === 'inProgress' ? (
         <EnterWordForm formAction={setUserSecretWord} />
       ) : (
         <>
@@ -63,7 +70,13 @@ function App() {
             buttonAction={handleUserEnterAction}
           />
         </>
-      )}
+      );
+  }
+
+  return (
+    <div data-test="component-app" className="container">
+      <h1>Jotto</h1>
+      {contents}
     </div>
   );
 }
