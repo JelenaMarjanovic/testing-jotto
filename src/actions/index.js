@@ -9,7 +9,8 @@ export const actionTypes = {
   RESET_GAME: 'RESET_GAME',
   GIVE_UP: 'GIVE_UP',
   USER_ENTERING: 'USER_ENTERING',
-  USER_ENTERED: 'USER_ENTERED'
+  USER_ENTERED: 'USER_ENTERED',
+  SERVER_ERROR: 'SERVER_ERROR'
 };
 
 /**
@@ -42,12 +43,18 @@ export const guessWord = (guessedWord) => {
  * @param {dispatch} dispatch - Redux Thunk dispatch
  */
 const getSecretWordDispatch = (dispatch) => {
-  return axios.get('http://localhost:3030').then((response) => {
-    dispatch({
-      type: actionTypes.SET_SECRET_WORD,
-      payload: response.data
-    });
-  });
+  return (
+    axios
+      .get('http://localhost:3030')
+      .then((response) => {
+        dispatch({
+          type: actionTypes.SET_SECRET_WORD,
+          payload: response.data
+        });
+      })
+      // Note: axios rejects promise if status is 4xx or 5xx
+      .catch((error) => dispatch({ type: actionTypes.SERVER_ERROR }))
+  );
 };
 
 /**
