@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import './EnterWordForm.css';
 
 const EnterWordForm = ({ formAction }) => {
   const [secretWord, setSecretWord] = useState('');
+  const dispatch = useDispatch();
 
   const submitForm = (event) => {
     event.preventDefault();
     // Don't submit an empty word
     if (secretWord.length > 0) {
-      formAction(secretWord);
+      dispatch(formAction(secretWord));
     }
   };
 
