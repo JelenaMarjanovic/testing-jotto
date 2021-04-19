@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { guessWord } from './actions';
+import { guessWord, giveUp } from './actions';
 
 const Input = ({ secretWord }) => {
   const [currentGuess, setCurrentGuess] = React.useState('');
@@ -34,6 +34,15 @@ const Input = ({ secretWord }) => {
           }}
         >
           Submit
+        </button>
+        <button
+          data-test="give-up-button"
+          className="btn btn-danger mb-2"
+          onClick={() => {
+            dispatch(giveUp());
+          }}
+        >
+          Give Up
         </button>
       </form>
     </div>

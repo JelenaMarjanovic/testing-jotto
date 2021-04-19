@@ -46,10 +46,16 @@ describe('render', () => {
       expect(inputBox.exists()).toBe(false);
     });
 
-    test('submit button does not show', () => {
+    test('"submit" button does not show', () => {
       const submitButton = findByTestAttr(wrapper, 'submit-button');
 
       expect(submitButton.exists()).toBe(false);
+    });
+
+    test('"give up" button does not show', () => {
+      const giveUpButton = findByTestAttr(wrapper, 'give-up-button');
+
+      expect(giveUpButton.exists()).toBe(false);
     });
   });
 
@@ -67,16 +73,22 @@ describe('render', () => {
       expect(inputComponent.length).toBe(1);
     });
 
-    test('input box does not show', () => {
+    test('renders input box', () => {
       const inputBox = findByTestAttr(wrapper, 'input-box');
 
       expect(inputBox.exists()).toBe(true);
     });
 
-    test('submit button does not show', () => {
+    test('renders "submit" button', () => {
       const submitButton = findByTestAttr(wrapper, 'submit-button');
 
       expect(submitButton.exists()).toBe(true);
+    });
+
+    test('renders "give up" button', () => {
+      const giveUpButton = findByTestAttr(wrapper, 'give-up-button');
+
+      expect(giveUpButton.exists()).toBe(true);
     });
   });
 });
