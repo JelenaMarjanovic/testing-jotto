@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 
 import { guessWord, giveUp } from './actions';
 
+import './Input.css';
+
 const Input = ({ secretWord }) => {
   const [currentGuess, setCurrentGuess] = React.useState('');
   const dispatch = useDispatch();
