@@ -42,8 +42,6 @@ function App() {
     dispatch(getSecretWord());
   }, [dispatch]);
 
-  console.log(secretWord);
-
   return (
     <div data-test="component-app" className="container">
       <h1>Jotto</h1>
