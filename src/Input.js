@@ -1,8 +1,13 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const Input = ({ success, secretWord }) => {
+import { guessWord, giveUp } from './actions';
+
+const Input = ({ secretWord }) => {
   const [currentGuess, setCurrentGuess] = React.useState('');
+  const dispatch = useDispatch();
+  const success = useSelector((state) => state.success);
 
   if (success) {
     return <div data-test="component-input" />;
@@ -10,7 +15,7 @@ const Input = ({ success, secretWord }) => {
 
   return (
     <div data-test="component-input">
-      <form className="form-inline">
+      <form className="form-inline spacer-bottom">
         <input
           data-test="input-box"
           className="mb-2 mx-sm-3"
@@ -24,12 +29,21 @@ const Input = ({ success, secretWord }) => {
           className="btn btn-primary mb-2"
           onClick={(event) => {
             event.preventDefault();
-            // TODO: update guessedWords
-            // TODO: check against secretWord and update success if needed
+            dispatch(guessWord(currentGuess));
             setCurrentGuess('');
           }}
         >
           Submit
+        </button>
+        <button
+          data-test="give-up-button"
+          className="btn btn-danger mb-2"
+          onClick={(event) => {
+            event.preventDefault();
+            dispatch(giveUp());
+          }}
+        >
+          Give Up
         </button>
       </form>
     </div>

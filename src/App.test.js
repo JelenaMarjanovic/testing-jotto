@@ -1,6 +1,8 @@
 import { mount } from 'enzyme';
 
-import { findByTestAttr } from '../test/testUtils';
+import { findByTestAttr, storeFactory } from '../test/testUtils';
+import { Provider } from 'react-redux';
+
 import App from './App';
 
 import { getSecretWord as mockGetSecretWord } from './actions';
@@ -14,9 +16,15 @@ jest.mock('./actions');
  * @returns {ShallowWrapper}
  */
 const setup = () => {
+  const store = storeFactory();
+
   // Use mount, because useEffect not called on 'shallow'
   // https://github.com/airbnb/enzyme/issues/2086
-  return mount(<App />);
+  return mount(
+    <Provider store={store}>
+      <App />
+    </Provider>
+  );
 };
 
 test('App renders without error', () => {
@@ -49,3 +57,7 @@ describe('get secret word', () => {
     expect(mockGetSecretWord).toHaveBeenCalledTimes(0);
   });
 });
+
+// Challenge #4: Enter Secret Word
+// Note: the logic of what displays according to state
+// should be tested here.
