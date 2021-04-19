@@ -57,3 +57,7 @@ describe('get secret word', () => {
     expect(mockGetSecretWord).toHaveBeenCalledTimes(0);
   });
 });
+
+// Challenge #4: Enter Secret Word
+// Note: the logic of what displays according to state
+// should be tested here.
