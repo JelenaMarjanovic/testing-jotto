@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 
 import { guessWord, giveUp } from './actions';
 
-import './Input.css';
-
 const Input = ({ secretWord }) => {
   const [currentGuess, setCurrentGuess] = React.useState('');
   const dispatch = useDispatch();
@@ -17,7 +15,7 @@ const Input = ({ secretWord }) => {
 
   return (
     <div data-test="component-input">
-      <form className="form-inline">
+      <form className="form-inline spacer-bottom">
         <input
           data-test="input-box"
           className="mb-2 mx-sm-3"

@@ -5,7 +5,9 @@ const TotalGuesses = (props) => {
   const { guessCount } = props;
 
   return (
-    <h4 data-test="component-total-guesses">Total Guesses: {guessCount}</h4>
+    <h4 data-test="component-total-guesses" className="spacer-bottom">
+      Total Guesses: {guessCount}
+    </h4>
   );
 };
 

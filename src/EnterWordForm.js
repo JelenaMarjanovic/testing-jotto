@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import './EnterWordForm.css';
-
 const EnterWordForm = ({ formAction }) => {
   const [secretWord, setSecretWord] = useState('');
   const dispatch = useDispatch();
@@ -21,7 +19,7 @@ const EnterWordForm = ({ formAction }) => {
       <p data-test="enter-word-instructions">
         Enter a secret word for someone else to guess!
       </p>
-      <form className="form-inline">
+      <form className="form-inline spacer-bottom">
         <input
           data-test="enter-word-input"
           className="mb-2 mx-sm-3"
